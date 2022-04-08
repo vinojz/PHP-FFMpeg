@@ -47,6 +47,11 @@ class Video extends AbstractVideo
      */
     public function concat($sources)
     {
+        if(is_array($sources) && (count($sources) > 0)) {
+            array_unshift($sources,$this->pathfile);
+        }else{
+            $sources = array($this->pathfile,$sources);
+        }
         return new Concat($sources, $this->driver, $this->ffprobe);
     }
 
